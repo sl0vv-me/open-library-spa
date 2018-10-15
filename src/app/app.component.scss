@@ -1,0 +1,168 @@
+.app-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: center;
+
+  height: 48px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  background-color: #1976d2;
+  color: #ffffff;
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .burger {
+    width: 30px;
+    height: 30px;
+    padding-top: 3px;
+    span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background-color: #ffffff;
+      margin: 6px 0;
+    }
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .mobile-wrap-top {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-wrap-bottom {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav {
+    flex-grow: 1;
+    display: flex;
+
+    padding: 0 40px;
+
+    ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin: -10px;
+    }
+    a {
+      display: inline-block;
+      padding: 17px 10px;
+
+      font-size: 0.875rem;
+      line-height: 1;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      color: #ffffff;
+      
+      &:hover, &:focus {
+        color: darken(#ffffff, 20);
+      }
+      &.active {
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+      }
+    }
+  }
+
+  .lang {
+    ul {
+      list-style: none;
+      display: flex;
+      align-content: center;
+      margin: 0 -10px;
+    }
+    li {
+      padding: 0 10px;
+      + li {
+        border-left: 2px solid #ffffff;
+      }
+    }
+    a {
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    height: auto;
+    .logo {
+      flex-grow: 1;
+    }
+    .mobile {
+      display: block;
+    }
+    .mobile-wrap-top, .mobile-wrap-bottom {
+      width: 100%;
+    }
+    .mobile-wrap-top {
+      height: 48px;
+    }
+    .mobile-wrap-bottom {
+      display: none;
+      &.open {
+        display: block;
+      }
+    }
+    .nav {
+      padding: 0;
+      display: block;
+      ul {
+        margin: 0 -10px;
+        display: block;
+      }
+      li {
+        display: block;
+      }
+      a {
+        display: block;
+      }
+    }
+    .lang {
+      ul {
+        padding: 20px 0;
+      }
+    }
+  }
+}
+
+.content {
+  flex-grow: 1;
+  overflow: auto;
+
+  height: 100%;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .content-wrap {
+    height: 100%;
+  }
+}

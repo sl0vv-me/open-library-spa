@@ -1,0 +1,64 @@
+<div class="panels-wrap">
+  <div class="top-panel">
+    <div class="cell">
+      <app-input [label]="'search_search' | translate" (keyup)="search()" [(ngModel)]="searchParams.q"></app-input>
+    </div>
+    <div class="cell">
+      <app-select [label]="'search_columns' | translate" [(ngModel)]="columns"></app-select>
+    </div>
+    <div class="cell">
+      <app-select [label]="'search_subjects' | translate"></app-select>
+    </div>
+  </div>
+
+  <div class="content-panel">
+    <table *ngIf="books.length" class="search-result">
+        <thead>
+          <tr>
+            <ng-container *ngFor="let column of columns">
+              <td *ngIf="column.checked" [class]="column.code">{{('table_' + column.code) | translate}}</td>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books" routerLink="/books/{{book.olid}}" [title]="book.title">
+            <ng-container *ngFor="let column of columns">
+              <td *ngIf="column.checked" [class]="column.code" [ngSwitch]="column.code">
+                <ng-container *ngSwitchCase="'cover'">
+                    <img *ngIf="book?.cover?.medium" [src]="book.cover.medium" [alt]="book.title">
+                </ng-container>
+                <ng-container *ngSwitchCase="'title'">
+                    {{book.title}}
+                </ng-container>
+                <ng-container *ngSwitchCase="'publish_date'">
+                    {{book.publish_date}}
+                </ng-container>
+                <ng-container *ngSwitchCase="'authors'">
+                    {{book.authors | arrayToString:'name'}}
+                </ng-container>
+                <ng-container *ngSwitchCase="'publishers'">
+                    {{book.publishers | arrayToString:'name'}}
+                </ng-container>
+                <ng-container *ngSwitchCase="'subject'">
+                    {{book.subject | arrayToString}}
+                </ng-container>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <div class="bottom-panel">
+    <div *ngIf="start" class="pagination">
+        <div class="numbers">{{start}} - {{+start + +searchParams.limit - 1}} {{'search_of' | translate}} {{totalPages}}</div>
+        <button class="arrow prev" [disabled]="!(searchParams.page > 1)" (click)="changePage(-1)"></button>
+        <button class="arrow next" [disabled]="!(searchParams.page + searchParams.limit < totalPages)" (click)="changePage(1)"></button>
+    </div>
+    <div class="range">
+      <select [(ngModel)]="searchParams.limit" (change)="search()">
+      <option *ngFor="let val of [5, 10, 20]" [value]="val">{{val}}</option>
+      </select>
+    </div>
+  </div>
+</div>

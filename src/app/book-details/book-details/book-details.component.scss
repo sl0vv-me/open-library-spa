@@ -1,0 +1,33 @@
+.details {
+  padding: 20px 0;
+  
+  .image {
+    float: left;
+    width: 180px;
+    margin: 0 20px 20px 0;
+    font-style: italic;
+    text-align: center;
+    img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+    }
+  }
+  .info {
+    overflow: hidden;
+  }
+  .line {
+    + .line {
+      margin-top: 10px;
+    }
+  }
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .subtitle {
+    font-size: 1.125rem;
+    font-style: italic;
+  }
+
+}

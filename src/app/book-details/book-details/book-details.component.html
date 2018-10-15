@@ -1,0 +1,32 @@
+<div *ngIf="book" class="details">
+  <div class="image">
+    <img *ngIf="book?.cover?.medium; else noImage" [src]="book.cover.medium" alt="{{book.title}}">
+    <ng-template #noImage>
+      <div class="placeholder-text">
+        {{'details_no_image' | translate}}
+      </div>
+    </ng-template>
+  </div>
+  <div class="info">
+    <div class="line title">{{book.title}}</div>
+    <div *ngIf="book.subtitle" class="line subtitle">{{book.subtitle}}</div>
+    <div class="line">{{'details_by_authors' | translate}}{{book.authors | arrayToString:'name'}}</div>
+    <div class="line">{{'details_published_date' | translate}} <b>{{book.publish_date}}</b> {{'details_published_by_publishers' | translate}} {{book.publishers | arrayToString:'name'}}</div>
+    <div *ngIf="book.weight" class="line">{{'details_weight' | translate}}: {{book.weight}}</div>
+    <div *ngIf="book.identifiers.amazone" class="line">
+      <div>Amazon:</div>
+      <div *ngFor="let id of book.identifiers.amazon">
+        <a href="http://www.amazon.com/dp/{{id}}/" target="_blank">{{id}}</a>
+      </div>
+    </div>
+    <div *ngIf="book.identifiers.google" class="line">
+      <div>Google books:</div>
+      <div *ngFor="let id of book.identifiers.google">
+        <a href="https://books.google.ru/books?id={{id}}/" target="_blank">{{id}}</a>
+      </div>
+    </div>
+    <div class="line">
+      <app-tags [label]="'details_tags' | translate" [tags]="tags" (input)="onTagInput($event)"></app-tags>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<label class="field tags">
+  <div *ngIf="label" class="label">{{label}}</div>
+  <ul class="tags">
+    <li *ngFor="let tag of tags">
+      {{tag}}
+      <a></a>
+    </li>
+  </ul>
+  <input type="text" class="input" (input)="onInput($event.target.value)">
+</label>

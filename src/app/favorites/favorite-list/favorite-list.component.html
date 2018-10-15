@@ -1,0 +1,24 @@
+<div class="panels-wrap">
+  <div class="top-panel">
+    <div class="cell full">
+      <app-select [label]="'favorites_filter' | translate" [(ngModel)]="filters"></app-select>
+    </div>
+  </div>
+  <div class="content-panel">
+    <div class="favorites-list">
+      <ul *ngIf="books.length; else noFavorites">
+        <li *ngFor="let book of filteredBooks()">
+          <span>
+            <a routerLink="/books/{{book.olid}}">{{book.title}}</a>
+            <span class="tags"> ({{book.tags | arrayToString}})</span>
+          </span>
+        </li>
+      </ul>
+      <ng-template #noFavorites>
+        <div class="placeholder-text">
+          {{'favorites_no_favorites' | translate}}
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
