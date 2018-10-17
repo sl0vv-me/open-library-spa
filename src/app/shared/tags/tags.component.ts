@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,20 +15,30 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class TagsComponent implements ControlValueAccessor {
   @Input() label: string;
-  @Input() tags = [];
+  @Output() enter: EventEmitter<any> = new EventEmitter();
+  @Output() tagRemove: EventEmitter<any> = new EventEmitter();
 
+  tags = [];
   value: string;
 
   writeValue(value) {
-    if (!value || typeof value !== 'string') {
+    if (!value || !Array.isArray(value)) {
       return;
     }
-    this.value = value;
-    this.onChange(this.value);
+    this.tags = value;
+    this.onChange(this.tags);
   }
 
-  onInput(value) {
-    this.writeValue(value);
+  onEnter(value) {
+    this.enter.emit(value);
+  }
+
+  removeTag(index) {
+    const event = {
+      tag: this.tags.splice(index, 1),
+      index
+    };
+    this.tagRemove.emit(event);
   }
 
   onChange: any = () => {};

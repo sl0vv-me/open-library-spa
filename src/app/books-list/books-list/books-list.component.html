@@ -7,46 +7,51 @@
       <app-select [label]="'search_columns' | translate" [(ngModel)]="columns"></app-select>
     </div>
     <div class="cell">
-      <app-select [label]="'search_subjects' | translate"></app-select>
+      <app-select [label]="'search_subjects' | translate" [(ngModel)]="subjects"></app-select>
     </div>
   </div>
 
   <div class="content-panel">
-    <table *ngIf="books.length" class="search-result">
-        <thead>
-          <tr>
-            <ng-container *ngFor="let column of columns">
-              <td *ngIf="column.checked" [class]="column.code">{{('table_' + column.code) | translate}}</td>
-            </ng-container>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of books" routerLink="/books/{{book.olid}}" [title]="book.title">
-            <ng-container *ngFor="let column of columns">
-              <td *ngIf="column.checked" [class]="column.code" [ngSwitch]="column.code">
-                <ng-container *ngSwitchCase="'cover'">
-                    <img *ngIf="book?.cover?.medium" [src]="book.cover.medium" [alt]="book.title">
-                </ng-container>
-                <ng-container *ngSwitchCase="'title'">
-                    {{book.title}}
-                </ng-container>
-                <ng-container *ngSwitchCase="'publish_date'">
-                    {{book.publish_date}}
-                </ng-container>
-                <ng-container *ngSwitchCase="'authors'">
-                    {{book.authors | arrayToString:'name'}}
-                </ng-container>
-                <ng-container *ngSwitchCase="'publishers'">
-                    {{book.publishers | arrayToString:'name'}}
-                </ng-container>
-                <ng-container *ngSwitchCase="'subject'">
-                    {{book.subject | arrayToString}}
-                </ng-container>
-              </td>
-            </ng-container>
-          </tr>
-        </tbody>
-      </table>
+    <table *ngIf="books.length; else placeholder" class="search-result">
+      <thead>
+        <tr>
+          <ng-container *ngFor="let column of columns">
+            <td *ngIf="column.checked" [class]="column.code">{{('table_' + column.code) | translate}}</td>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of filteredBooks()" routerLink="/books/{{book.olid}}" [title]="book.title">
+          <ng-container *ngFor="let column of columns">
+            <td *ngIf="column.checked" [class]="column.code" [ngSwitch]="column.code">
+              <ng-container *ngSwitchCase="'cover'">
+                  <img *ngIf="book?.cover?.medium" [src]="book.cover.medium" [alt]="book.title">
+              </ng-container>
+              <ng-container *ngSwitchCase="'title'">
+                  {{book.title}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'publish_date'">
+                  {{book.publish_date}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'authors'">
+                  {{book.authors | arrayToString:'name'}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'publishers'">
+                  {{book.publishers | arrayToString:'name'}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'subject'">
+                  {{book.subject | arrayToString}}
+              </ng-container>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #placeholder>
+      <div class="placeholder-text no-results">
+        {{'search_no_results' | translate}}
+      </div>
+    </ng-template>
   </div>
 
   <div class="bottom-panel">

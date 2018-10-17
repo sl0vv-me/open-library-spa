@@ -26,7 +26,10 @@
       </div>
     </div>
     <div class="line">
-      <app-tags [label]="'details_tags' | translate" [tags]="tags" (input)="onTagInput($event)"></app-tags>
+      <app-tags [label]="'details_tags' | translate" [(ngModel)]="tags"
+        (input)="onTagInput($event)" 
+        (enter)="onTagEnter($event)"
+        (tagRemove)="syncTags()"></app-tags>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <div *ngIf="label" class="label">{{label}}</div>
   <input type="text" class="input" [value]="getValueString()" (keypress)="false">
   <div *ngIf="isOpen" class="dropdown">
-    <ul>
+    <ul *ngIf="options.length; else noItems">
       <li *ngFor="let option of options">
         <label>
           <input type="checkbox" [(ngModel)]="option.checked" (change)="onCheckboxChange()">
@@ -10,5 +10,10 @@
         </label>
       </li>
     </ul>
+    <ng-template #noItems>
+      <div class="placeholder-text">
+        {{'select_input_no_items' | translate }}
+      </div>
+    </ng-template>
   </div>
 </div>

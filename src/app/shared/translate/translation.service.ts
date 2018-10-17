@@ -23,6 +23,7 @@ export class TranslationService {
               'search_search': 'Search',
               'search_columns': 'Columns',
               'search_subjects': 'Subjects',
+              'search_no_results': 'Enter a query',
               'search_of': 'of',
 
               'table_cover': 'Thumbnail',
@@ -41,6 +42,8 @@ export class TranslationService {
 
               'favorites_filter': 'Filter',
               'favorites_no_favorites': 'No favorites yet',
+
+              'select_input_no_items': 'No options'
           }
       },
       'ru' : {
@@ -52,6 +55,7 @@ export class TranslationService {
               'search_search': 'Поиск',
               'search_columns': 'Колонки',
               'search_subjects': 'Темы',
+              'search_no_results': 'Введите запрос',
               'search_of': 'из',
 
               'table_cover': 'Обложка',
@@ -70,6 +74,8 @@ export class TranslationService {
 
               'favorites_filter': 'Фильтр',
               'favorites_no_favorites': 'Избранное отсутствует',
+
+              'select_input_no_items': 'Опции отсутствуют'
           }
       }
   };

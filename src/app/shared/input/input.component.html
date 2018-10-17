@@ -1,4 +1,4 @@
 <label class="field">
   <div *ngIf="label" class="label">{{label}}</div>
-  <input type="text" class="input" (input)="onInput($event.target.value)">
+  <input type="text" class="input" (input)="onInput($event.target.value)" [(ngModel)]="value">
 </label>

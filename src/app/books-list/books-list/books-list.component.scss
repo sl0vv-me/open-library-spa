@@ -22,6 +22,13 @@
   }
 }
 
+.content-panel {
+  .no-results {
+    margin-top: 30px;
+    text-align: center;
+  }
+}
+
 .bottom-panel {
   display: flex;
   flex-direction: row-reverse;
@@ -62,8 +69,5 @@
         }
       }
     }  
-  }
-  .range {
-    
   }
 }

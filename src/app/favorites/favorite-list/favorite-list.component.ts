@@ -12,24 +12,19 @@ import { FavoriteBook } from '../../favorite-book';
 export class FavoriteListComponent implements OnInit {
 
   books: FavoriteBook[];
-  filters: CheckOption[];
+  filters: CheckOption[] = [];
 
   constructor(private storageService: StorageService) { }
 
   filteredBooks(): FavoriteBook[] {
     const filterRaw: CheckOption[] = this.filters.filter((val) => val.checked);
-    const filter = filterRaw.map((val) => val.name);
-
-    return this.books.filter((val) => {
-      let result = false;
-      for (const tag of val.tags) {
-        if (filter.indexOf(tag) !== -1) {
-          result = true;
-          break;
-        }
-      }
-      return result;
-    });
+    if (filterRaw.length) {
+      const filter = filterRaw.map((val) => val.name);
+      return this.books.filter((val) => {
+        return val.tags.some(tag => filter.indexOf(tag) !== -1);
+      });
+    }
+    return this.books;
   }
 
   ngOnInit(): void {
@@ -45,7 +40,7 @@ export class FavoriteListComponent implements OnInit {
       this.filters = tags.map((val: string) => {
         return {
           name: val,
-          checked: true
+          checked: false
         };
       });
     }
